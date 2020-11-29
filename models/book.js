@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+mongoose.promise = Promise;
+
 
 const bookSchema = new Schema({
   title: { 
