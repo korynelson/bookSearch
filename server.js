@@ -5,7 +5,7 @@ const app = express();
 const bookroutes = require("./routes/books");
 const axios = require('axios')
 require('dotenv').config();
-const API_KEY = process.env.GOOGLEBOOKS_API_KEY || process.env.API_KEY ;
+const API_KEY = process.env.GOOGELBOOKS_API_KEY || process.env.API_KEY ;
 
 //initializes mongoose connection;
 require("./db");
@@ -28,6 +28,9 @@ app.get('/google:query', async (request, response) => {
   const search_url = `https://www.googleapis.com/books/v1/volumes?q=${q}&key=${API_KEY}`;
   const books = await axios.get(search_url).then((res) =>{
     return res.data
+  }).catch((err) => {
+    console.log(err);
+    return
   })
     return response.json(books) 
 });
