@@ -2,7 +2,10 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const routes = require("./routes/books");
+const bookroutes = require("./routes/books");
+const axios = require('axios')
+require('dotenv').config();
+const API_KEY = process.env.GOOGLEBOOKS_API_KEY || process.env.API_KEY ;
 
 //initializes mongoose connection;
 require("./db");
@@ -16,7 +19,19 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-app.use(routes);
+app.use(bookroutes);
+
+// Google Book Api search route
+app.get('/google:query', async (request, response) => {
+  console.log(request.params);
+  const q = request.params.query;
+  const search_url = `https://www.googleapis.com/books/v1/volumes?q=${q}&key=${API_KEY}`;
+  const books = await axios.get(search_url).then((res) =>{
+    return res.data
+  })
+    return response.json(books) 
+});
+
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
