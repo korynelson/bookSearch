@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
   },
   headerOptions: {
     display: "flex",
-    flex: 1,
-    justifyContent: "space-evenly"
+    flexgrow: 1,
+    '& > *': {
+      margin: theme.spacing(1),
+    },
   },
-  buttons: {
-    justifyContent: "space-evenly"
-  }
+
 }));
 
 const MenuAppBar = (props) => {
