@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -7,17 +7,28 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
 import { withRouter} from 'react-router-dom';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
   },
   title: {
+    display: "flex",
+    flexGrow: 1,
   },
+  headerOptions: {
+    display: "flex",
+    flex: 1,
+    justifyContent: "space-evenly"
+  },
+  buttons: {
+    justifyContent: "space-evenly"
+  }
 }));
 
 const MenuAppBar = (props) => {
@@ -25,6 +36,9 @@ const MenuAppBar = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
+  console.log(isMobile)
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -39,17 +53,20 @@ const MenuAppBar = (props) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon 
-              onClick={handleMenu}
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            />
+          <Typography variant="h6" className={classes.title}>
+            Book Search
+          </Typography>
+            { isMobile ? (
+            <>
+          <IconButton 
+            edge="start" 
+            className={classes.menuButton} 
+            color="inherit" 
+            aria-label="menu"
+            onClick={handleMenu}
+            >
+            <MenuIcon/>
           </IconButton>
-          <div>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -68,10 +85,13 @@ const MenuAppBar = (props) => {
                 <MenuItem onClick={() => handleClick('/')}>Search</MenuItem>
                 <MenuItem onClick={() => handleClick('/savedbooks')}>Saved Books</MenuItem>
               </Menu>
+            </>
+          ) : (
+            <div className={classes.headerOptions}>
+              <Button size="small" variant="outlined" onClick={() => handleClick('/')}>Search</Button>
+              <Button size="small" variant="outlined" onClick={() => handleClick('/savedbooks')}>Saved Books</Button>
             </div>
-          <Typography variant="h6" className={classes.title}>
-            Book Search
-          </Typography>
+          )}
         </Toolbar>
       </AppBar>
     </div>
