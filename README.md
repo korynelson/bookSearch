@@ -4,8 +4,10 @@
 ## Description
 This application uses the Google Books API to enable a user to find books and save them to their databse.  Users can save and delete books from their list as they progress through their reading list. Data is stored in MongoDB Atlas and inclides book title, authors, cover image, and link to the book on books.google.com
 
+### Search Page
 ![noteapp](./assets/images/homepage.PNG)
 
+### Saved Books Page
 ![noteapp](./assets/images/savdbooks.PNG)
 
 ## Table of Contents
