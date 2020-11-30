@@ -30,7 +30,7 @@ const Search = props => {
           <BookCard 
             id = {bookData[bookID].volumeInfo.industryIdentifiers[1]}
             title = {bookData[bookID].volumeInfo.title}
-            description = {bookData[bookID].volumeInfo.description}
+            description = {bookData[bookID].volumeInfo.description.slice(0,25)}
             img = {bookData[bookID].volumeInfo.imageLinks.smallThumbnail}
             authors = {bookData[bookID].volumeInfo.authors}
             link = {bookData[bookID].volumeInfo.infoLink}

@@ -53,7 +53,7 @@ const BookCard = (props) => {
         </CardContent>
         <div>
             <p>
-                {props.description}
+                {props.description.slice(0,100)}
             </p>
         </div>
       </div>
