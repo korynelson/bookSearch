@@ -12,6 +12,7 @@ const Search = props => {
   async function handleClick(e) {
     e.preventDefault();
     await axios.get(`/google${query}`).then((response) => {
+      console.log(response)
       setBookData(response.data.items)
     }) 
     setQuery('')
@@ -19,7 +20,15 @@ const Search = props => {
 
 
   const getBookCard = (bookID) => {
-    if(bookData[bookID].volumeInfo.industryIdentifiers[1]){
+    if(
+      bookData[bookID].volumeInfo.industryIdentifiers
+      && bookData[bookID].volumeInfo.title
+      && bookData[bookID].volumeInfo.description
+      && bookData[bookID].volumeInfo.imageLinks
+      && bookData[bookID].volumeInfo.authors
+      && bookData[bookID].volumeInfo.infoLink
+      && bookData[bookID]
+      ){
       return(
         <Grid key = {bookData[bookID]._id} container spacing = {7}>
           <Grid item spacing = {7} xs = {1}/>
@@ -43,12 +52,12 @@ const Search = props => {
           <Grid item spacing = {7} xs = {1}/>
           <Grid item spacing = {7} xs = {10}>
             <BookCard 
-              id = {bookData[bookID].volumeInfo.title}
-              title = {bookData[bookID].volumeInfo.title}
-              description = {bookData[bookID].volumeInfo.description}
-              img = {bookData[bookID].volumeInfo.imageLinks.smallThumbnail}
-              authors = {bookData[bookID].volumeInfo.authors}
-              link = {bookData[bookID].volumeInfo.infoLink}
+              id = {"Not Enough Data To Render"}
+              title = {"Not Enough Data To Render"}
+              description = {"Not Enough Data To Render"}
+              img = {"Not Enough Data To Render"}
+              authors = {"Not Enough Data To Render"}
+              link = {"Not Enough Data To Render"}
             />
           </Grid>
           <Grid item spacing = {7} xs = {1}/>
