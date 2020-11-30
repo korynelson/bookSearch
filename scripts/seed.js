@@ -14,6 +14,13 @@ const bookSeed = [
         link: "http://books.google.com/books?id=sazytgAACAAJ&dq=title:The+Hunger+Games&hl=&source=gbs_api",
         title: "The Hunger Games",
     },
+    {
+      authors: ["William C. Dietz"],
+      description: "The humans aboard the spaceship the Pillar of Autumn crash-land onto a mysterious ringworld, where they",
+      img: "http://books.google.com/books/content?id=UgfJO3kUF90C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      link: "http://books.google.com/books?id=UgfJO3kUF90C&dq=Halo&hl=&source=gbs_api",
+      title: "Halo: The Flood",
+  },
 ];
 db.Book
   .remove({})
