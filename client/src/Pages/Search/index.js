@@ -7,14 +7,11 @@ import BookCard from '../../components/BookCard/index'
 
 const Search = props => {
   const [query, setQuery] = useState("");
-  const [bookData, setBookData] = useState("");
+  const [bookData, setBookData] = useState(null);
 
   async function handleClick(e) {
     e.preventDefault();
-    console.log(e.target)
     await axios.get(`/google${query}`).then((response) => {
-      console.log('hello')
-      console.log(response)
       setBookData(response.data.items)
     }) 
     setQuery('')
@@ -22,23 +19,43 @@ const Search = props => {
 
 
   const getBookCard = (bookID) => {
-    console.log(bookData[`${bookID}`])
-    return(
-      <Grid key = {bookData[bookID]._id} container spacing = {7}>
-        <Grid item spacing = {7} xs = {1}/>
-        <Grid item spacing = {7} xs = {10}>
-          <BookCard 
-            id = {bookData[bookID].volumeInfo.industryIdentifiers[1]}
-            title = {bookData[bookID].volumeInfo.title}
-            description = {bookData[bookID].volumeInfo.description.slice(0,25)}
-            img = {bookData[bookID].volumeInfo.imageLinks.smallThumbnail}
-            authors = {bookData[bookID].volumeInfo.authors}
-            link = {bookData[bookID].volumeInfo.infoLink}
-          />
+    if(bookData[bookID].volumeInfo.industryIdentifiers[1]){
+      return(
+        <Grid key = {bookData[bookID]._id} container spacing = {7}>
+          <Grid item spacing = {7} xs = {1}/>
+          <Grid item spacing = {7} xs = {10}>
+            <BookCard 
+              id = {bookData[bookID].volumeInfo.industryIdentifiers[1]}
+              title = {bookData[bookID].volumeInfo.title}
+              description = {bookData[bookID].volumeInfo.description}
+              img = {bookData[bookID].volumeInfo.imageLinks.smallThumbnail}
+              authors = {bookData[bookID].volumeInfo.authors}
+              link = {bookData[bookID].volumeInfo.infoLink}
+              data = {bookData[bookID]}
+            />
+          </Grid>
+          <Grid item spacing = {7} xs = {1}/>
         </Grid>
-        <Grid item spacing = {7} xs = {1}/>
-      </Grid>
-    )
+      )
+    }else{
+      return(
+        <Grid key = {bookData[bookID]._id} container spacing = {7}>
+          <Grid item spacing = {7} xs = {1}/>
+          <Grid item spacing = {7} xs = {10}>
+            <BookCard 
+              id = {bookData[bookID].volumeInfo.title}
+              title = {bookData[bookID].volumeInfo.title}
+              description = {bookData[bookID].volumeInfo.description}
+              img = {bookData[bookID].volumeInfo.imageLinks.smallThumbnail}
+              authors = {bookData[bookID].volumeInfo.authors}
+              link = {bookData[bookID].volumeInfo.infoLink}
+            />
+          </Grid>
+          <Grid item spacing = {7} xs = {1}/>
+        </Grid>
+      )
+    }
+
   }
 
   return (

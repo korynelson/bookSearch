@@ -5,9 +5,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
+import BOOKS from '../../utils/BOOKS'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +37,19 @@ const BookCard = (props) => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const saveBook = () => {
+    console.log(props.data)
+    BOOKS.saveBook(props.data).then(response => {
+      console.log(response)
+      if (!response.data.errors) {
+          console.log('it worked');
+      } else {
+        console.log('validation failed')
+      }
+      
+  });
+  }
+
   return (
     <Card className={classes.root}>
         <CardMedia
@@ -44,18 +59,39 @@ const BookCard = (props) => {
       />
       <div className={classes.details}>
         <CardContent className={classes.content}>
+          {props.title ? (
+            <Typography component="h5" variant="h5">
+              {props.title.slice(0,50)}
+            </Typography>
+          ) : (
           <Typography component="h5" variant="h5">
-            {props.title}
+            {"No Title For This Book"}
           </Typography>
+          )}
           <Typography variant="subtitle1" color="textSecondary">
             {props.authors}
           </Typography>
         </CardContent>
         <div>
+            {props.description ? 
+            (
+              <p>
+              {props.description.slice(0,100)}
+              </p>
+            ) : (
             <p>
-                {props.description.slice(0,100)}
-            </p>
+              {"No Description For This Book"}
+             </p> 
+            )
+
+            }
         </div>
+        <div>
+        <Button id ={props.id} variant="contained" color="primary" onClick = {saveBook}>
+          Save
+        </Button>
+        </div>
+
       </div>
 
     </Card>
