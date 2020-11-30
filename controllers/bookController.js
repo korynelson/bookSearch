@@ -3,11 +3,9 @@ const db = require("../models/index");
 // Defining methods for the userController
 module.exports = {
   getBooks: (req, res) => {
-    console.log('inside the controller')
-    console.log(req.query)
     db.Book.find()
-      .then((song) => {
-        res.json(song);
+      .then((books) => {
+        res.json(books);
       })
       .catch((err) => {
         res.status(422).json(err)});
@@ -28,10 +26,22 @@ module.exports = {
       title: title,
     });
 
-    console.log(newBook)
     newBook.save((err, savedBook) => {
       if (err) return res.json(err);
       return res;
     });
-  }
+  },
+
+  deleteBook: (req,res) => {
+    const id = req.body.id;
+    db.Book.deleteOne({id:id},(err, bookMatch) => {
+      if (bookMatch) {
+        return res.json({
+          error: `I found that book in the databse: ${id}`,
+        });
+      }else{
+        console.log('couldnt find that book')
+      }
+  });
+}
 }

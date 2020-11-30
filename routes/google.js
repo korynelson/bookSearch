@@ -3,10 +3,8 @@ const API_KEY = process.env.GOOGLEBOOKS_API_KEY || process.env.API_KEY ;
 
 
 router.get('/google:query', async (request, response) => {
-    console.log(request.params);
     const q = request.params.query;
     const search_url = `https://www.googleapis.com/books/v1/books?q=${q}=${API_KEY}`;
-    console.log (search_url)
     const weather_response = await fetch(search_url);
     const weather_data = await weather_response.json();
   

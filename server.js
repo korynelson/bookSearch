@@ -23,7 +23,6 @@ app.use(bookroutes);
 
 // Google Book Api search route
 app.get('/google:query', async (request, response) => {
-  console.log(request.params);
   const q = request.params.query;
   const search_url = `https://www.googleapis.com/books/v1/volumes?q=${q}&key=${API_KEY}&maxresults=10`;
   const books = await axios.get(search_url).then((res) =>{

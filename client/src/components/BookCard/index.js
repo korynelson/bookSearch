@@ -1,14 +1,10 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
 import BOOKS from '../../utils/BOOKS'
 
 const useStyles = makeStyles((theme) => ({
@@ -35,19 +31,29 @@ const useStyles = makeStyles((theme) => ({
 
 const BookCard = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   const saveBook = () => {
-    console.log(props.data)
     BOOKS.saveBook(props.data).then(response => {
-      console.log(response)
       if (!response.data.errors) {
-          console.log('it worked');
+          console.log('Book saved');
       } else {
-        console.log('validation failed')
+        console.log('Book was no saved')
       }
-      
+    props.setRenderBooks(`${props.id}`)
   });
+  }
+
+  const deleteBook = () => {
+    BOOKS.deleteBook(props.data).then(response => {
+      if (!response.data.errors) {
+          console.log('Book Deleted');
+      } else {
+        console.log('Book was not deleted')
+      }
+      props.setRenderBooks(`${props.id}`)
+
+  });
+  
   }
 
   return (
@@ -87,8 +93,11 @@ const BookCard = (props) => {
             }
         </div>
         <div>
-        <Button id ={props.id} variant="contained" color="primary" onClick = {saveBook}>
+        <Button margin-right="5px" id ={props.id} variant="contained" color="primary" onClick = {saveBook}>
           Save
+        </Button>
+        <Button id ={props.id} variant="contained" color="primary" onClick = {deleteBook}>
+          Delete
         </Button>
         </div>
 

@@ -38,7 +38,6 @@ const MenuAppBar = (props) => {
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
-  console.log(isMobile)
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);

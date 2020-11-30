@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
-import { CircularProgress, Grid, Typography } from "@material-ui/core";
+import { Grid, } from "@material-ui/core";
 import BookCard from '../../components/BookCard/index'
 
 const Search = props => {
@@ -12,7 +12,6 @@ const Search = props => {
   async function handleClick(e) {
     e.preventDefault();
     await axios.get(`/google${query}`).then((response) => {
-      console.log(response)
       setBookData(response.data.items)
     }) 
     setQuery('')
@@ -31,10 +30,10 @@ const Search = props => {
       ){
       return(
         <Grid key = {bookData[bookID]._id} container spacing = {7}>
-          <Grid item spacing = {7} xs = {1}/>
-          <Grid item spacing = {7} xs = {10}>
+          <Grid item  xs = {1}/>
+          <Grid item  xs = {10}>
             <BookCard 
-              id = {bookData[bookID].volumeInfo.industryIdentifiers[1]}
+              id = {bookData[bookID].volumeInfo.industryIdentifiers[0]}
               title = {bookData[bookID].volumeInfo.title}
               description = {bookData[bookID].volumeInfo.description}
               img = {bookData[bookID].volumeInfo.imageLinks.smallThumbnail}
@@ -43,14 +42,14 @@ const Search = props => {
               data = {bookData[bookID]}
             />
           </Grid>
-          <Grid item spacing = {7} xs = {1}/>
+          <Grid item  xs = {1}/>
         </Grid>
       )
     }else{
       return(
         <Grid key = {bookData[bookID]._id} container spacing = {7}>
-          <Grid item spacing = {7} xs = {1}/>
-          <Grid item spacing = {7} xs = {10}>
+          <Grid item  xs = {1}/>
+          <Grid item  xs = {10}>
             <BookCard 
               id = {"Not Enough Data To Render"}
               title = {"Not Enough Data To Render"}
@@ -60,7 +59,7 @@ const Search = props => {
               link = {"Not Enough Data To Render"}
             />
           </Grid>
-          <Grid item spacing = {7} xs = {1}/>
+          <Grid item  xs = {1}/>
         </Grid>
       )
     }
