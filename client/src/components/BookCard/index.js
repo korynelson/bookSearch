@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -44,14 +44,13 @@ const BookCard = (props) => {
   }
 
   const deleteBook = () => {
-    BOOKS.deleteBook(props.data).then(response => {
+    BOOKS.deleteBook(props.data._id).then(response => {
       if (!response.data.errors) {
           console.log('Book Deleted');
       } else {
         console.log('Book was not deleted')
       }
       props.setRenderBooks(`${props.id}`)
-
   });
   
   }

@@ -32,9 +32,9 @@ module.exports = {
     });
   },
 
-  deleteBook: (req,res) => {
-    const id = req.body.id;
-    db.Book.deleteOne({id:id},(err, bookMatch) => {
+  deleteBook: (req , res) => {
+    const id = req.query[0];
+    db.Book.findOneAndDelete({_id:id},(err, bookMatch) => {
       if (bookMatch) {
         return res.json({
           error: `I found that book in the databse: ${id}`,

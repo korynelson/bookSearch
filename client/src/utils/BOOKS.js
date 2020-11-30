@@ -10,7 +10,7 @@ export default {
     return axios.post('/books', bookData);
   },
 
-  deleteBook: function(bookData){
-    return axios.delete('/books', bookData);
+  deleteBook: function(deleteId){
+    return axios.delete('/books',{params: deleteId});
   }
 };
