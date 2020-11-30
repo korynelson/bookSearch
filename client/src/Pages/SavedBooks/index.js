@@ -12,7 +12,6 @@ const SavedBooks = props => {
   useEffect(() => {
     BOOKS.getBooks().then((res) => {
       setBookData(res.data)
-      console.log("rendering")
     });
   },[renderBooks]);
 

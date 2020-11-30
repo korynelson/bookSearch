@@ -35,9 +35,7 @@ const BookCard = (props) => {
   const saveBook = () => {
     BOOKS.saveBook(props.data).then(response => {
       if (!response.data.errors) {
-          console.log('Book saved');
       } else {
-        console.log('Book was no saved')
       }
     props.setRenderBooks(`${props.id}`)
   });
@@ -46,9 +44,7 @@ const BookCard = (props) => {
   const deleteBook = () => {
     BOOKS.deleteBook(props.data._id).then(response => {
       if (!response.data.errors) {
-          console.log('Book Deleted');
       } else {
-        console.log('Book was not deleted')
       }
       props.setRenderBooks(`${props.id}`)
   });
