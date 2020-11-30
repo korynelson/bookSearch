@@ -1,29 +1,42 @@
-# Create React Express App
+# Google Books Search & Save
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## About This Boilerplate
+## Description
+This application uses the Google Books API to enable a user to find books and save them to their databse.  Users can save and delete books from their list as they progress through their reading list. Data is stored in MongoDB Atlas and inclides book title, authors, cover image, and link to the book on books.google.com
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+![noteapp](./assets/images/homepage.PNG)
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+![noteapp](./assets/images/savdbooks.PNG)
 
-## Starting the app locally
+## Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+* [License](#license)
+* [Contributing](#Contributing)
+* [Tests](#Tests)
+* [Questions](#Questions)
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+## Installation
+Clone this repository and run command "npm install" to get dependencies
 
-```
-npm install
-```
+## Usage
+### To run locally
+Enter the command "npm start" to start application and navigate to localhost:8080 in your browser
+### Use on Heroku
+[Heroku Application](https://korys-google-book-search.herokuapp.com/savedbooks)
 
-This should install node modules within the server and the client folder.
+## License
+This repository is licensed under the MIT license
 
-After both installations complete, run the following command in your terminal:
+## Contributing
+No additional contributions are expected for this application
 
-```
-npm start
-```
+## Tests
+There are currently no test for this application
 
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+## Questions
+#### For any questions about this repository send an email to kory.nelson99@gmail.com
+#### View my full GitHub at [https://github.com/korynelson](https://github.com/korynelson)
 
-## Deployment (Heroku)
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.

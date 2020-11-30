@@ -92,6 +92,7 @@ const BookCard = (props) => {
 
             }
         </div>
+          <a href={`${props.link}`} target="_blank">See more info on books.google</a>
         <div>
         <Button margin-right="5px" id ={props.id} variant="contained" color="primary" onClick = {saveBook}>
           Save
